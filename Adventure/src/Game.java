@@ -4,7 +4,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -84,11 +83,10 @@ public class Game {
 		
 		choiceButtonPanel = new JPanel();
 		choiceButtonPanel.setBounds(75, 525, 1050, 225);
-		choiceButtonPanel.setBackground(Color.black);
 		choiceButtonPanel.setLayout(new GridLayout(2,2));
 		window.add(choiceButtonPanel);
 		
-		choice1 = new JButton("Choice 1");
+		choice1 = new JButton();
 		choice1.setBackground(Color.black);
 		choice1.setForeground(Color.white);
 		choice1.setFont(choiceFont);
@@ -96,7 +94,7 @@ public class Game {
 		choiceButtonPanel.add(choice1);
 		choice1.addActionListener(choiceHandler);
 		choice1.setActionCommand("c1");
-		choice2 = new JButton("Choice 2");
+		choice2 = new JButton();
 		choice2.setBackground(Color.black);
 		choice2.setForeground(Color.white);
 		choice2.setFont(choiceFont);
@@ -104,7 +102,7 @@ public class Game {
 		choiceButtonPanel.add(choice2);
 		choice2.addActionListener(choiceHandler);
 		choice2.setActionCommand("c2");
-		choice3 = new JButton("Choice 3");
+		choice3 = new JButton();
 		choice3.setBackground(Color.black);
 		choice3.setForeground(Color.white);
 		choice3.setFont(choiceFont);
@@ -112,7 +110,7 @@ public class Game {
 		choiceButtonPanel.add(choice3);
 		choice3.addActionListener(choiceHandler);
 		choice3.setActionCommand("c3");
-		choice4 = new JButton("Choice 4");
+		choice4 = new JButton();
 		choice4.setBackground(Color.black);
 		choice4.setForeground(Color.white);
 		choice4.setFont(choiceFont);
@@ -189,16 +187,10 @@ public class Game {
 	
 	public void playerSetup() {
 		playerLvl = 1;
-//		playerXP = 0;
 		XpNeeded = 5;
 		maxHP = 20;
 		playerHP = maxHP;
-		maxMana = 0;
-		playerMana = maxMana;
 		weapon = "Knife";
-//		coins = 0;
-//		potions = 0;
-		magicAffinity = 0;
 		lvlLabelNumber.setText("" + playerLvl);
 		xpLabelNumber.setText("" + playerXP + "/" + XpNeeded);
 		hpLabelNumber.setText("" + playerHP);
@@ -209,18 +201,22 @@ public class Game {
 		introductionOne();
 	}
 	
-	public void introductionOne() {
-		position = "introductionOne";
-		mainText.setText("You want to join the Adventurers Guild to help defeat the Demon Lord but are not high enough level.  Go to the forest to level up.");
+	public void continueButton() {
 		choice1.setText("-->");
 		choice2.setText("");
 		choice3.setText("");
 		choice4.setText("");
 	}
 	
+	public void introductionOne() {
+		position = "introductionOne";
+		mainText.setText("You want to join the Adventurers Guild to help defeat the Demon Lord but are not high enough level.  Go to the forest to level up.");
+		continueButton();
+	}
+	
 	public void locationDecision() {
 		position = "locationDecision";
-		mainText.setText("Do you want to go to the Adventurers \nGuild, Shop, Forest or Inn?");	
+		mainText.setText("Do you want to go to the Adventurers Guild, Shop, Forest or Inn?");	
 		choice1.setText("Adventurers Guild");
 		choice2.setText("Shop");
 		choice3.setText("Forest");
@@ -235,10 +231,7 @@ public class Game {
 		hpLabelNumber.setText("" + playerHP);
 		playerMana = maxMana;
 		manaLabelNumber.setText("" + playerMana);
-		choice1.setText("-->");
-		choice2.setText("");
-		choice3.setText("");
-		choice4.setText("");
+		continueButton();
 	}
 	
 	public void Shop() {
@@ -252,7 +245,6 @@ public class Game {
 	}
 	
 	public void Sword() {
-//		position = "Sword";
 		if(coins>=10 && !weapon.equals("Sword")) {
 			mainText.setText("Merchant: Thank you for purchasing a sword. Would you like to purchase anything else?");
 			weapon = "Sword";
@@ -266,14 +258,9 @@ public class Game {
 		else if (weapon.equals("Sword")) {
 			mainText.setText("Merchant: I'm sorry, you already have a sword");
 		}
-//		choice1.setText("-->");
-//		choice2.setText("");
-//		choice3.setText("");
-//		choice4.setText("");
 	}
 	
 	public void Bow() {
-//		position = "Bow";
 		if(coins>=10 && !weapon.equals("Bow")) {
 			mainText.setText("Merchant: Thank you for purchasing a bow. Would you like to purchase anything else?");
 			weapon = "Bow";
@@ -287,14 +274,9 @@ public class Game {
 		else if (weapon.equals("Bow")) {
 			mainText.setText("Merchant: I'm sorry, you already have a bow");
 		}
-//		choice1.setText("-->");
-//		choice2.setText("");
-//		choice3.setText("");
-//		choice4.setText("");
 	}
 
 	public void Potion() {
-//		position = "Potion";
 		if(coins>=2 && potions<10) {
 			mainText.setText("Merchant: Thank you for purchasing a potion. Would you like to purchase anything else?");
 			potions++;
@@ -308,14 +290,10 @@ public class Game {
 		else if (potions>=10) {
 			mainText.setText("Merchant: I'm sorry, you have the maximum number of potions");
 		}
-//		choice1.setText("-->");
-//		choice2.setText("");
-//		choice3.setText("");
-//		choice4.setText("");
 	}
 	
 	public void lvlUpNeeded() {
-		mainText.setText("You are a high enough level to join the Adventurers Guild. Please come back when you're at least level 5");
+		mainText.setText("You are not high enough level to join the Adventurers Guild. Please come back when you're at least level 5");
 	}
 	
 	public void adventurersGuild() {
@@ -344,10 +322,7 @@ public class Game {
 		monster = "Goblin";
 		monsterHP = 8;
 		xpGained = 10;
-		choice1.setText("-->");
-		choice2.setText("");
-		choice3.setText("");
-		choice4.setText("");	
+		continueButton();
 	}
 	
 	public void princess() {
@@ -358,10 +333,7 @@ public class Game {
 		monster = "Bandit";
 		monsterHP = 15;
 		xpGained = 100;
-		choice1.setText("-->");
-		choice2.setText("");
-		choice3.setText("");
-		choice4.setText("");
+		continueButton();
 	}
 	
 	public void excalibur() {
@@ -369,10 +341,7 @@ public class Game {
 		quest = 3;
 		questCoins = 20;
 		mainText.setText("Some say that Excalibur is a legendary sword that can only be found in the forest. Go to the forest and search for Excalibur");
-		choice1.setText("-->");
-		choice2.setText("");
-		choice3.setText("");
-		choice4.setText("");
+		continueButton();
 	}
 	
 	public void dragon() {
@@ -383,10 +352,7 @@ public class Game {
 		monster = "Dragon";
 		monsterHP = 35;
 		xpGained = 300;
-		choice1.setText("-->");
-		choice2.setText("");
-		choice3.setText("");
-		choice4.setText("");
+		continueButton();
 	}
 	
 	public void demonLord() {
@@ -397,10 +363,7 @@ public class Game {
 		monster = "Demon Lord";
 		monsterHP = 70; 
 		xpGained = 0;
-		choice1.setText("-->");
-		choice2.setText("");
-		choice3.setText("");
-		choice4.setText("");
+		continueButton();
 	}
 	
 	public void lvlLow() {
@@ -420,10 +383,7 @@ public class Game {
 		mainText.setText("Congratulations! You completed the quest. You gained " + questCoins + " coins");
 		coins = coins + questCoins;
 		coinLabelNumber.setText("" + coins);
-		choice1.setText("-->");
-		choice2.setText("");
-		choice3.setText("");
-		choice4.setText("");
+		continueButton();
 	}
 	
 	public void questInProgress() {
@@ -445,6 +405,13 @@ public class Game {
 		choice4.setText("<--");
 	}
 	
+	public void fightOrRun() {
+		choice1.setText("Fight");
+		choice2.setText("Run");
+		choice3.setText("");
+		choice4.setText("");
+	}
+	
 	public void Left() {
 		rng = new java.util.Random().nextInt(4);
 		switch(rng) {
@@ -453,48 +420,34 @@ public class Game {
 			monster = "Goblin";
 			monsterHP = 8;
 			xpGained = 3;
-			mainText.setText(monster + " HP: " + monsterHP + "\nYou have encountered a goblin.  What will you do?");
-			choice1.setText("Fight");
-			choice2.setText("Run");
-			choice3.setText("");
-			choice4.setText("");
 			break;
 		case 1:
 			position = "battle";
 			monster = "Orc";
 			monsterHP = 12;
 			xpGained = 6;
-			mainText.setText(monster + " HP: " + monsterHP + "\nYou have encountered an orc.  What will you do?");
-			choice1.setText("Fight");
-			choice2.setText("Run");
-			choice3.setText("");
-			choice4.setText("");
 			break;
 		case 2:
 			position = "battle";
 			monster = "Direwolf";
 			monsterHP = 10;
 			xpGained = 5;
-			mainText.setText(monster + " HP: " + monsterHP + "\nYou have encountered a direwolf.  What will you do?");
-			choice1.setText("Fight");
-			choice2.setText("Run");
-			choice3.setText("");
-			choice4.setText("");
 			break;
-		case 3:
+		}
+		if(rng == 3) {
 			position = "Lake";
 			mainText.setText("You have found a lake.  Your health and mana are now restored");
 			playerHP = maxHP;
 			hpLabelNumber.setText("" + playerHP);
 			playerMana = maxMana;
 			manaLabelNumber.setText("" + playerMana);
-			
-			choice1.setText("-->");
-			choice2.setText("");
-			choice3.setText("");
-			choice4.setText("");
-			break;
+			continueButton();
 		}
+		else {
+			mainText.setText(monster + " HP: " + monsterHP + "\nYou have encountered a " + monster + ".  What will you do?");
+			fightOrRun();
+		}
+		
 	}
 	
 	public void Straight() {
@@ -511,46 +464,32 @@ public class Game {
 			monster = "Ogre";
 			monsterHP = 15;
 			xpGained = 10;
-			mainText.setText(monster + " HP: " + monsterHP + "\nYou have encountered an Ogre.  What will you do?");
-			choice1.setText("Fight");
-			choice2.setText("Run");
-			choice3.setText("");
-			choice4.setText("");
 			break;
 		case 1:
 			position = "battle";
 			monster = "Harpy";
 			monsterHP = 14;
 			xpGained = 12;
-			mainText.setText(monster + " HP: " + monsterHP + "\nYou have encountered a Harpy.  What will you do?");
-			choice1.setText("Fight");
-			choice2.setText("Run");
-			choice3.setText("");
-			choice4.setText("");
 			break;
 		case 2:
 			position = "battle";
 			monster = "Minotaur";
 			monsterHP = 16;
 			xpGained = 14;
-			mainText.setText(monster + " HP: " + monsterHP + "\nYou have encountered a Minotaur.  What will you do?");
-			choice1.setText("Fight");
-			choice2.setText("Run");
-			choice3.setText("");
-			choice4.setText("");
 			break;
-		case 3:
+		}
+		if(rng == 3) {
 			position = "Elemental";
 			mainText.setText("You have found an elemental spirit. You can now use magic");
 			magicAffinity = 1;
 			maxMana = 20;
 			playerMana = maxMana;
 			manaLabelNumber.setText("" + playerMana);
-			choice1.setText("-->");
-			choice2.setText("");
-			choice3.setText("");
-			choice4.setText("");
-			break;
+			continueButton();
+		}
+		else {
+			mainText.setText(monster + " HP: " + monsterHP + "\nYou have encountered a " + monster + ".  What will you do?");
+			fightOrRun();
 		}
 	}
 	
@@ -563,10 +502,7 @@ public class Game {
 			monsterHP = 30;
 			xpGained = 50;
 			mainText.setText(monster + " HP: " + monsterHP + "\nYou have encountered a Wyvern.  What will you do?");
-			choice1.setText("Fight");
-			choice2.setText("Run");
-			choice3.setText("");
-			choice4.setText("");
+			fightOrRun();
 			break;
 		case 1:
 			position = "battle";
@@ -574,10 +510,7 @@ public class Game {
 			monsterHP = 25;
 			xpGained = 40;
 			mainText.setText(monster + " HP: " + monsterHP + "\nYou have encountered an Archdemon.  What will you do?");
-			choice1.setText("Fight");
-			choice2.setText("Run");
-			choice3.setText("");
-			choice4.setText("");
+			fightOrRun();
 			break;
 		case 2:
 			position = "battle";
@@ -585,38 +518,36 @@ public class Game {
 			monsterHP = 21;
 			xpGained = 35;
 			mainText.setText(monster + " HP: " + monsterHP + "\nYou have encountered a Vampire.  What will you do?");
-			choice1.setText("Fight");
-			choice2.setText("Run");
-			choice3.setText("");
-			choice4.setText("");
+			fightOrRun();
 			break;
-		case 3:
+		}
+		if(rng == 3) {
 			position = "Treasure";
 			x = 2;
 			if(quest == 3){
 				x = 3;
 			}
 			rng = new java.util.Random().nextInt(x);
-			if(rng == 2) {
-				mainText.setText("Congratulations! You have found a treasure chest. You opened it and found Excalibur");
-				weapon = "Excalibur";
-				weaponLabelString.setText(weapon);
-			}
-			if(rng == 1) {
-				mainText.setText("Congratulations! You have found a treasure chest. You opened it and found 50 coins");
-				coins = coins + 50;
-				coinLabelNumber.setText("" + coins);
-			}
-			if(rng == 1) {
+			if(rng == 0) {
 				mainText.setText("Congratulations! You have found a treasure chest. You opened it and got 100 xp");
 				playerXP = playerXP + 100;
 				xpLabelNumber.setText("" + playerXP + "/" + XpNeeded);
 			}
-			choice1.setText("-->");
-			choice2.setText("");
-			choice3.setText("");
-			choice4.setText("");
-			break;
+			else if(rng == 1) {
+				mainText.setText("Congratulations! You have found a treasure chest. You opened it and found 50 coins");
+				coins = coins + 50;
+				coinLabelNumber.setText("" + coins);
+			}
+			else if(rng == 2) {
+				mainText.setText("Congratulations! You have found a treasure chest. You opened it and found Excalibur");
+				weapon = "Excalibur";
+				weaponLabelString.setText(weapon);
+			}
+			continueButton();
+		}
+		else {
+			mainText.setText(monster + " HP: " + monsterHP + "\nYou have encountered a " + monster + ".  What will you do?");
+			fightOrRun();
 		}
 	}
 	
@@ -656,21 +587,14 @@ public class Game {
 		if(monsterHP<0) {
 			monsterHP = 0;
 		}
-		choice1.setText("-->");
-		choice2.setText("");
-		choice3.setText("");
-		choice4.setText("");
+		continueButton();
 	}
 	
 	public void useMagic() {
 		position = "useMagic";
 		if(magicAffinity == 0) {
 			mainText.setText("Sorry, you do not have an affinity for magic.  Find an elemental spirit to learn magic");
-			
-			choice1.setText("-->");
-			choice2.setText("");
-			choice3.setText("");
-			choice4.setText("");
+			continueButton();
 		}
 		else {
 			mainText.setText("Which magic ability would you like to use?");
@@ -704,10 +628,7 @@ public class Game {
 		}
 		playerDMG = playerDMG + magicRNG;	
 		magicRNG = 0;
-		choice1.setText("-->");
-		choice2.setText("");
-		choice3.setText("");
-		choice4.setText("");
+		continueButton();
 		}
 		else {
 			position = "Fight";
@@ -739,10 +660,7 @@ public class Game {
 		else {
 			mainText.setText("You attacked the " + monster + " with ice magic and did " + playerDMG + " damage");
 		}
-		choice1.setText("-->");
-		choice2.setText("");
-		choice3.setText("");
-		choice4.setText("");
+		continueButton();
 		}
 		else {
 			position = "Fight";
@@ -776,10 +694,7 @@ public class Game {
 		}
 		playerDMG = playerDMG + magicRNG;
 		magicRNG = 0;
-		choice1.setText("-->");
-		choice2.setText("");
-		choice3.setText("");
-		choice4.setText("");
+		continueButton();
 		}
 		else {
 			position = "Fight";
@@ -811,10 +726,7 @@ public class Game {
 		else {
 			mainText.setText("You attacked the " + monster + " with lightning magic and did " + playerDMG + " damage");
 		}
-		choice1.setText("-->");
-		choice2.setText("");
-		choice3.setText("");
-		choice4.setText("");
+		continueButton();
 		}
 		else {
 			position = "Fight";
@@ -851,10 +763,7 @@ public class Game {
 		hpLabelNumber.setText("" + playerHP);
 		manaLabelNumber.setText("" + playerMana);
 		mainText.setText("You gained " + potionHealing + " HP and " + potionMana + " mana");
-		choice1.setText("-->");
-		choice2.setText("");
-		choice3.setText("");
-		choice4.setText("");
+		continueButton();
 		}
 		else {
 			position = "Fight";
@@ -868,6 +777,14 @@ public class Game {
 	
 	public void monsterAttack() {
 		position = "monsterAttack";
+		if(monsterHP<=0) {
+			monsterKilled();
+		}
+		else if(stun == 1) {
+			Fight(); 
+			stun = 0;
+		}
+		else {
 		if(monster.equals("Goblin")) {
 			monsterDMG = new java.util.Random().nextInt(2);
 			monsterDMG++;
@@ -928,10 +845,8 @@ public class Game {
 			playerHP = 0;
 		}
 		hpLabelNumber.setText("" + playerHP);
-		choice1.setText("-->");
-		choice2.setText("");
-		choice3.setText("");
-		choice4.setText("");
+		continueButton();
+		}
 	}
 	
 	public void Run() {
@@ -940,18 +855,12 @@ public class Game {
 		if(rng < (50 + (agility * 3))) {
 			position = "Run";
 			mainText.setText("You have successfully ran away.");
-			choice1.setText("-->");
-			choice2.setText("");
-			choice3.setText("");
-			choice4.setText("");
+			continueButton();
 		}
 		else {
 			position = "failedRun";
 			mainText.setText("You have failed to run away. \nLevel up agility to increase your chances of escaping");
-			choice1.setText("-->");
-			choice2.setText("");
-			choice3.setText("");
-			choice4.setText("");
+			continueButton();
 		}
 	}
 	
@@ -964,22 +873,23 @@ public class Game {
 		choice4.setText("");
 	}
 	
-	public void lose() {
-		position = "lose";
-		mainText.setText("You are dead! \n\n\n <GAME OVER>");
+	public void gameOver() {
 		choice1.setText("");
 		choice2.setText("");
 		choice3.setText("");
 		choice4.setText("");
 	}
 	
+	public void lose() {
+		position = "lose";
+		mainText.setText("You are dead! \n\n\n <GAME OVER>");
+		gameOver();
+	}
+	
 	public void win() {
 		position = "win";
 		mainText.setText("Congratulations, you have defeated the Demon Lord \n\n\n <YOU WIN>");
-		choice1.setText("");
-		choice2.setText("");
-		choice3.setText("");
-		choice4.setText("");
+		gameOver();
 	}
 	
 	public void monsterKilled() {
@@ -1016,10 +926,7 @@ public class Game {
 		coins = coins + coinsGained;
 		coinLabelNumber.setText("" + coins);
 		mainText.setText(monster + " HP: " + monsterHP + "\nCongratulations, you have killed the " + monster + ". You gained " + coinsGained + " coins and " + xpGained + " XP");
-		choice1.setText("-->");
-		choice2.setText("");
-		choice3.setText("");
-		choice4.setText("");
+		continueButton();
 	}
 	
 	public void lvlUp() {
@@ -1061,19 +968,12 @@ public class Game {
 			position = "Strength";
 			mainText.setText("Congratulations!  You leveled up Strength");
 			strength++;
-			choice1.setText("-->");
-			choice2.setText("");
-			choice3.setText("");
-			choice4.setText("");
 		}
 		else {
 			position = "maxLvl";
 			mainText.setText("You have already maxed out your strength. Please choose a different category to level up");
-			choice1.setText("-->");
-			choice2.setText("");
-			choice3.setText("");
-			choice4.setText("");
 		}
+		continueButton();
 	}
 	
 	public void Defense() {
@@ -1082,19 +982,12 @@ public class Game {
 			mainText.setText("Congratulations!  You leveled up Defense");
 			defense++;
 			maxHP = 20 + defense;
-			choice1.setText("-->");
-			choice2.setText("");
-			choice3.setText("");
-			choice4.setText("");
 		}
 		else {
 			position = "maxLvl";
 			mainText.setText("You have already maxed out your defense. Please choose a different category to level up");
-			choice1.setText("-->");
-			choice2.setText("");
-			choice3.setText("");
-			choice4.setText("");
 		}
+		continueButton();
 	}
 	
 	public void Magic() {
@@ -1104,10 +997,6 @@ public class Game {
 		mainText.setText("Congratulations!  You leveled up Magic");
 		magic++;
 		maxMana = 20 + magic;
-		choice1.setText("-->");
-		choice2.setText("");
-		choice3.setText("");
-		choice4.setText("");
 		}
 		else {
 			position = "noMagicAffinity";
@@ -1121,11 +1010,8 @@ public class Game {
 		else {
 			position = "maxLvl";
 			mainText.setText("You have already maxed out your magic. Please choose a different category to level up");
-			choice1.setText("-->");
-			choice2.setText("");
-			choice3.setText("");
-			choice4.setText("");
 		}
+		continueButton();
 	}
 	
 	public void Agility() {
@@ -1133,19 +1019,12 @@ public class Game {
 		position = "Agility";
 		mainText.setText("Congratulations!  You leveled up Agility");
 		agility++;
-		choice1.setText("-->");
-		choice2.setText("");
-		choice3.setText("");
-		choice4.setText("");
 		}
 		else {
 			position = "maxLvl";
 			mainText.setText("You have already maxed out your agility. Please choose a different category to level up");
-			choice1.setText("-->");
-			choice2.setText("");
-			choice3.setText("");
-			choice4.setText("");
 		}
+		continueButton();
 	}
 	
 	public class TitleScreenHandler implements ActionListener{
@@ -1323,21 +1202,6 @@ public class Game {
 				case "c4": locationDecision(); break;
 				}
 				break;
-//			case "Sword":
-//				switch(Choice) {
-//				case "c1": locationDecision(); break;
-//				}
-//				break;
-//			case "Bow":
-//				switch(Choice) {
-//				case "c1": locationDecision(); break;
-//				}
-//				break;
-//			case "Potion":
-//				switch(Choice) {
-//				case "c1": locationDecision(); break;
-//				}
-//				break;
 			case "Forest":
 				switch(Choice) {
 				case "c1": Left(); break;
@@ -1432,33 +1296,13 @@ public class Game {
 				else  {
 					switch(Choice) {
 					case "c1": 
-						if(monsterHP<=0) {
-							monsterKilled();
-						}
-						else{
 							Fire(); break;
-						}
 					case "c2": 
-						if(monsterHP<=0) {
-							monsterKilled();
-						}
-						else{
 							Ice(); break;
-						}
 					case "c3": 
-						if(monsterHP<=0) {
-							monsterKilled();
-						}
-						else{
 							Poison(); break;
-						}
 					case "c4": 
-						if(monsterHP<=0) {
-							monsterKilled();
-						}
-						else{
 							Lightning(); break;
-						}
 				}
 				break;
 				}
@@ -1466,51 +1310,25 @@ public class Game {
 			case "Fire":
 				switch(Choice) {
 				case "c1": 
-					if(monsterHP<=0) {
-						monsterKilled();
-					}
-					else{
 						monsterAttack(); break;
-					}
 				}
 				break;
 			case "Ice":
 				switch(Choice) {
 				case "c1": 
-					if(monsterHP<=0) {
-						monsterKilled();
-					}
-					else if(stun == 1) {
-						Fight(); stun = 0; break;
-					}
-					else{
 						monsterAttack(); break;
-					}
 				}
 				break;
 			case "Poison":
 				switch(Choice) {
 				case "c1": 
-					if(monsterHP<=0) {
-						monsterKilled();
-					}
-					else{
 						monsterAttack(); break;
-					}
 				}
 				break;
 			case "Lightning":
 				switch(Choice) {
 				case "c1": 
-					if(monsterHP<=0) {
-						monsterKilled();
-					}
-					else if(stun == 1) {
-						Fight(); stun = 0; break;
-					}
-					else{
 						monsterAttack(); break;
-					}
 				}
 				break;
 			case "Elemental":
@@ -1521,23 +1339,16 @@ public class Game {
 			case "Treasure":
 				switch(Choice) {
 				case "c1": 
-					if(playerLvl < 40) {
-						if(playerXP >= XpNeeded) {
-							lvlUp(); break;
-						}
-						else if(weapon.equals("Excalibur") && quest == 3) {
-							questComplete(); break;
-						}
-						else {
-							forestContinue(); break;
-						}
+					if(rng == 0 && playerXP >= XpNeeded) {
+						lvlUp();
 					}
-					else if(weapon.equals("Excalibur") && quest == 3) {
-						questComplete(); break;
+					else if(rng == 2) {
+						questComplete();
 					}
 					else {
-						forestContinue(); break;
+						forestContinue();
 					}
+				break;
 				}
 				break;
 			case "lvlUp":
